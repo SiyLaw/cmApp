@@ -1,0 +1,15 @@
+<!--pages/work/items.wxml-->
+<view class="fun-list">
+  <block wx:for="{{showItems}}" wx:key="{{item.txt}}">
+    <navigator open-type="navigate" url="{{item.url}}" hover-class="none">
+      <view class="item">
+        <view class="item-image">
+          <image src="{{item.img}}"></image>
+        </view>
+        <view class="item-txt">
+          {{item.txt}}
+        </view>
+      </view>
+    </navigator>
+  </block>
+</view>

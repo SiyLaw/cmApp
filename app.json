@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/work/wItems/package",
+    "pages/work/items",
+    "pages/work/wItems/scanSettings",
+    "pages/work/wItems/truck",
+    "pages/work/more"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "重庆聖立印务",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#808080",
+    "selectedColor": "#7587db",
+    "backgroundColor": "#F5F5F5",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "image/wipes.png",
+        "selectedIconPath": "image/wipes2.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/work/items",
+        "iconPath": "image/work.png",
+        "selectedIconPath": "image/work2.png",
+        "text": "控制台"
+      }
+    ]
+  }
+}

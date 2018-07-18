@@ -1,0 +1,153 @@
+<!--pages/work/db/db_main.wxml-->
+<import src="/comm/loading.wxml" />
+<view class='container' style='padding-bottom:110rpx;'>
+  <template is="pageloading" data="{{hideclass:hideclass,realhide:realhide}}" />
+  <view class="page-section">
+    <view class="splited"></view>
+    <view class="item">
+      <view class="item-image" style="background-color:#4682B4;">
+        <image src="/image/Task.png"></image>
+      </view>
+      <picker bindchange="bindClassChange" value="{{index}}" range="{{DB_TP}}" style='width:100%;'>
+        <view class="item-txt">
+          <view>打包岗位</view>
+          <view>
+            {{DB_TP[index]}}
+          </view>
+        </view>
+      </picker>
+      <!-- <view class="item-right" style="padding:0;">
+          {{PPTS}}
+        </view> -->
+
+    </view>
+    <view class="item-sub">
+      <view class="item-txt">
+        <view class='color-grey'>工单号:</view>
+        <view class="item-val-fbd color-red">
+          {{work[0].WORK_SHEET_NO||"请扫描..."}}
+        </view>
+      </view>
+    </view>
+    <block wx:for="{{work}}" wx:for-index="idx" wx:key="{{PROD_BASIC_ID}}">
+      <view class="splited"></view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>订单号:</view>
+          <view class="item-val-fbd color-red">
+            {{item.ORDER_NO}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>客户名称:</view>
+          <view class="item-val">
+            {{item.PARTNER_NME}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>订单信息:</view>
+          <view class="item-val">
+            {{item.PROD_INFO}}
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>订单要求:</view>
+          <view class="item-val">
+            {{item.PROD_REMARKS}}
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="page-section">
+    <view class="splited"></view>
+    <view class="item">
+      <view class="item-image" style="background-color:#FF8C00;">
+        <image src="/image/NeedPackage.png"></image>
+      </view>
+      <view class="item-txt">
+        <view>待打包</view>
+      </view>
+    </view>
+    <view class="item-sub" wx:if="{{item.IS_PACKAGED == undefined || item.IS_PACKAGED == '0'}}" wx:for="{{items}}" wx:for-index="idx" wx:key="{{ADDRESS_ID}}" data-idx="{{idx}}" bindtap='showPackageModel'>
+      <view class="item-txt">
+        <view class="item-val">
+          {{item.CONSIGNEE}}-{{item.TEL}}-{{item.ADDR_LABEL}}
+        </view>
+        <view>
+          {{item.DELIVERY_CNT}}件
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="page-section">
+    <view class="splited"></view>
+    <view class="item">
+      <view class="item-image" style="background-color:#2E8B57;">
+        <image src="/image/Packaged.png"></image>
+      </view>
+      <view class="item-txt">
+        <view>已打包</view>
+      </view>
+    </view>
+    <view class="item-sub" wx:for="{{items}}" wx:if="{{item.IS_PACKAGED == '1'}}" wx:for-index="idx" wx:key="{{ADDRESS_ID}}">
+      <view class="item-txt">
+        <view class="item-val">
+          {{item.CONSIGNEE}}-{{item.TEL}}-{{item.ADDR_LABEL}}
+        </view>
+        <view>
+          {{item.DELIVERY_CNT}}件
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="splited"></view>
+</view>
+<view class="page-bottom">
+  <view class="top-tab flex-wrp flex-center work-cust" bindtap="scan">
+    <view class="flex-item flex-center">
+      <image src="/image/Scanner.png"></image>扫 码
+    </view>
+  </view>
+</view>
+
+<!--弹出窗-->
+<view class="module-bg-layer" wx:if="{{show_print_module}}">
+  <view class="dv-module">
+    <view class="page-section">
+      <view class="item flex-center color-grey title-cust">
+        <view class="item-image">
+          <image src="/image/Settings.png"></image>
+        </view>打包设置
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class="color-grey">打包数量</view>
+        </view>
+        <view class="item-right">
+          <input type="number" style='text-align:right;font-size:35rpx;' bindblur='onInputSuccess' value="{{spiltCnt}}" placeholder="请输入打包数量" />
+          <view class="item-right-end color-grey">包</view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class="color-grey">每包件数</view>
+        </view>
+        <view class="item-right">
+          <view style='text-align:right;font-size:35rpx;'>{{spiltNum}}</view>
+          <view class="item-right-end color-grey">件</view>
+        </view>
+      </view>
+    </view>
+    <view class="cust-btn-blue">
+      <a bindtap="SubmitPrint">确认&打印</a>
+      <a bindtap="ClosePrint">关闭</a>
+    </view>
+  </view>
+</view>

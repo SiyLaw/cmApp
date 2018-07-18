@@ -1,0 +1,38 @@
+/* pages/work/items.wxss */
+
+.fun-list {
+  margin-top: 20rpx;
+  padding: 20rpx auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  color: #808080;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx 10rpx;
+  align-items: center;
+  border-bottom: none;
+}
+
+.item-image {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 120rpx;
+  border: 1rpx solid #F5F5F5;
+}
+
+.item-image image {
+  width: 90rpx;
+  height: 90rpx;
+  padding: 32rpx 32rpx;
+}
+
+.item-txt {
+  font-size: 28rpx;
+  padding: 10rpx 20rpx;
+  color: #808080;
+}

@@ -1,0 +1,53 @@
+/**index.wxss**/
+
+.page-section {
+  border-top: 0px solid #eee;
+}
+
+.cust-zindex {
+  z-index: 100 !important;
+}
+
+.title {
+  font-size: 50rpx;
+  padding-bottom: 30rpx;
+}
+
+.subtitle {
+  padding-bottom: 10rpx;
+}
+
+.item-total {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 30rpx 10rpx;
+}
+
+.cust-bind {
+  padding-top: 50rpx;
+  color: #606060;
+  font-size: 50rpx;
+}
+
+.cust-bind-desc {
+  padding-top: 30rpx;
+  padding-bottom: 20rpx;
+  color: #808080;
+  font-size: 30rpx;
+}
+.cust-bind-desc view{
+  text-align: center;
+}
+
+.item-txt {
+  flex: 3;
+}
+
+.item-right {
+  justify-content: flex-start;
+}
+
+.item-right input {
+  text-align: left;
+}

@@ -1,0 +1,112 @@
+<!--index.wxml-->
+<import src="/comm/loading.wxml" />
+<import src="/comm/user.wxml" />
+<view class="container">
+  <template is="pageloading" data="{{hideclass:hideclass,realhide:realhide}}" />
+  <block wx:if="{{!isAuth}}">
+    <view class='page-loading cust-zindex'>
+      <view class='title'>重庆彩美欢迎您！</view>
+      <view class='subtitle'>授权后使用小程序</view>
+      <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+      <view wx:else>请升级微信版本</view>
+    </view>
+  </block>
+  <block wx:else>
+    <template is="UserInfo" data="{{avatarUrl: userInfo.avatarUrl,nickName:userInfo.nickName}}" />
+    <block wx:if="{{user[0].IS_BIND == '1'}}">
+      <view wx:if="{{user[0].UTP == 'CUST'}}">
+        下单客户
+      </view>
+      <view wx:elif="{{user[0].UTP == 'OUTSIDE_OPERATOR' }}">
+        业务伙伴
+      </view>
+      <view wx:elif="{{user[0].UTP != ''}}">
+        <view class="page-section">
+          <view class="item-total">
+            <view class="titem">
+              <view class="item-desc">所属公司</view>
+              <view class="item-head">{{user[0].UCP_NME}}</view>
+            </view>
+            <view class="titem">
+              <view class="item-desc">所属部门</view>
+              <view class="item-head">{{user[0].UOF_NME}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="page-section">
+          <view class="splited"></view>
+          <view class="item">
+            <view class="item-image" style="background-color:#3CB371;">
+              <image src="../../image/Link.png"></image>
+            </view>
+            <view class="item-txt">
+              <view>作业记录</view>
+              <view bindtap='navtoMore'>更多></view>
+            </view>
+          </view>
+          <view class="table">
+            <view class="table-body">
+              <view class="tr bg-w">
+                <view class="th">工单号</view>
+                <view class="th">岗位</view>
+                <view class="th">时间</view>
+              </view>
+              <block wx:for="{{work}}" wx:key="{{ID}}">
+                <view class="tr {{(index+1) % 2 == 0 ? 'bg-g' : ''}} ">
+                  <view class="td lightGreen" data-id='{{item.ID}}' data-sc="{{item.SC}}" data-sn="{{item.SN}}" bindtap='navtoWork'>{{item.WSN}}</view>
+                  <view class="td">{{item.SN}}</view>
+                  <view class="td">{{item.DT}}</view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- <view class="page-bottom">
+        <view class="top-tab top-tab-bg flex-wrp flex-center">
+          <view class="flex-item flex-center top-tab-select">
+            <image src="/image/wipes2.png"></image>首页
+          </view>
+          <view class="flex-item flex-center" bindtap='navToUrl'>
+            <image src="/image/work.png"></image>控制台
+          </view>
+        </view>
+      </view> -->
+    </block>
+    <view wx:else class="flex-wrp flex-v-center">
+      <view class='cust-bind'>
+        重庆聖立印务欢迎您！
+      </view>
+      <view class='cust-bind-desc'>
+        <view>初次使用请绑定网站帐号!</view>
+        <view>官方注册：https://www.cqcaimei.cn</view>
+      </view>
+      <view class='cust-bind-desc'>
+      </view>
+      <view class="page-section">
+        <view class="splited"></view>
+        <form bindsubmit="binduser">
+          <view class="item">
+            <view class="item-txt">
+              <view class="color-grey">用户名</view>
+            </view>
+            <view class="item-right">
+              <input name="USER_CDE" placeholder="请输入网站用户名" />
+            </view>
+          </view>
+          <view class="item">
+            <view class="item-txt">
+              <view class="color-grey">用户密码</view>
+            </view>
+            <view class="item-right">
+              <input type='password' name="USER_PSD" bindblur="getMd5" placeholder="请输入网站用户密码" />
+            </view>
+          </view>
+          <view class="cust-btn-blue">
+            <button type="primary" formType="submit" disabled='{{isUsed}}'>绑定帐号</button>
+          </view>
+        </form>
+      </view>
+    </view>
+  </block>
+</view>

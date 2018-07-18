@@ -1,0 +1,343 @@
+<!--pages/work/wItems/scanSettings.wxml-->
+<import src="/comm/loading.wxml" />
+<view class='container' style='padding-bottom:110rpx;'>
+  <template is="pageloading" data="{{hideclass:hideclass,realhide:realhide}}" />
+  <view class="page-section">
+    <view class="splited"></view>
+    <view class="item">
+      <view class="item-image" style="background-color:#4682B4;">
+        <image src="/image/Task.png"></image>
+      </view>
+      <view class="item-txt">
+        <view>当前岗位</view>
+        <view>
+          {{TYPE_NME}}
+        </view>
+      </view>
+    </view>
+    <view class="item-sub">
+      <view class="item-txt">
+        <view class='color-grey'>工单号:</view>
+        <view class="item-val-fbd color-red">
+          {{work[0].WORK_SHEET_NO||"请扫描..."}}
+        </view>
+      </view>
+    </view>
+    <block wx:for="{{work}}" wx:for-index="idx" wx:key="{{PROD_WORK_SHEET_ID}}">
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>总备注:</view>
+          <view class="item-val">
+            {{item.REMARKS}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>工艺备注:</view>
+          <view class="item-val">
+            {{item.CRAFT_REMARKS}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>制单人:</view>
+          <view class="item-val">
+            {{item.INITIAL_USR}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>制单日期:</view>
+          <view class="item-val">
+            {{item.INITIAL_DT}}
+          </view>
+        </view>
+      </view>
+    </block>
+    <block wx:for="{{items}}" wx:for-index="idx" wx:key="{{WORK_SHEET_DETAIL_ID}}">
+      <view class="splited"></view>
+      <view wx:if="{{idx==0}}" class="item">
+        <view class="item-image" style="background-color:#2E8B57;">
+          <image src="/image/morder.png"></image>
+        </view>
+        <view class="item-txt">
+          <view>工单明细</view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>部件名称:</view>
+          <view class="item-val">
+            {{item.PROD_PARTY_NME}}.{{item.PROD_PARTY_NME_EXT}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>拼数:</view>
+          <view class="item-val">
+            {{item.PROD_COMB_CNT}}
+          </view>
+        </view>
+        <view class="item-txt">
+          <view class='color-grey'>套数:</view>
+          <view class="item-val">
+            {{item.PROD_TYPE_CNT}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>正数:</view>
+          <view class="item-val">
+            {{item.PROD_POSITIVE_CNT}}
+          </view>
+        </view>
+        <view class="item-txt">
+          <view class='color-grey'>放数:</view>
+          <view class="item-val">
+            {{item.PROD_RELEASE_CNT}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>切成数量:</view>
+          <view class="item-val">
+            {{item.PROD_CUT_CNT}}
+          </view>
+        </view>
+        <view class="item-txt">
+          <view class='color-grey'>全开张数:</view>
+          <view class="item-val">
+            {{item.PROD_CUT_SIZE}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>正/反色数:</view>
+          <view class="item-val">
+            {{item.PRINTING_FS_COLOR_CNT}}/{{item.PRINTING_BS_COLOR_CNT}}
+          </view>
+        </view>
+        <view class="item-txt">
+          <view class='color-grey'>版数:</view>
+          <view class="item-val">
+            {{item.PRINTING_PLATE_CNT}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>纸张名称:</view>
+          <view class="item-val">
+            {{item.PAPER_NME}}.{{item.PROD_PAPER_SIZE_TYPE}}({{item.PAPER_CF_TYPE_CID}})
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>机型名称:</view>
+          <view class="item-val">
+            {{item.PRINTER_NME}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>印刷方式:</view>
+          <view class="item-val">
+            {{item.PRINTING_TYPE_CDE}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>备注:</view>
+          <view class="item-val">
+            {{item.PRINTING_REMARKS}}
+          </view>
+        </view>
+      </view>
+    </block>
+    <block wx:if="{{logs.length > 0}}">
+      <view class="splited"></view>
+      <view class="item">
+        <view class="item-image" style="background-color:#FF8C00;">
+          <image src="/image/list.png"></image>
+        </view>
+        <view class="item-txt">
+          <view>作业详情</view>
+        </view>
+      </view>
+      <view class="fiextable">
+        <view class="tb-head">
+          <view class="table">
+            <view class="table-body">
+              <view class="tr bg-w">
+                <view class="th-head">岗位</view>
+              </view>
+              <!-- 岗位列表 -->
+              <block wx:for="{{logs}}" wx:key="{{ID}}">
+                <view class="tr {{ (index+1) % 2 == 0 ? 'bg-g' : ''}} ">
+                  <view class="td-head">{{item.STATION_NME}}</view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+        <view class="tb-body">
+          <scroll-view scroll-x class="sview">
+            <view class="table">
+              <view class="table-body">
+                <view class="tr bg-w">
+                  <view class="th">收货量</view>
+                  <view class="th">出货量</view>
+                  <view class="th">放数</view>
+                </view>
+                <block wx:for="{{logs}}" wx:key="{{ID}}">
+                  <view class="tr {{(index+1) % 2 == 0 ? 'bg-g' : ''}} ">
+                    <view class="td">{{item.ACT_IN_QTY}}</view>
+                    <view class="td">{{item.ACT_OUT_QTY}}</view>
+                    <view class="td">{{item.ACT_WASTE_QTY}}</view>
+                  </view>
+                </block>
+              </view>
+            </view>
+            <view class="table">
+              <view class="table-body">
+                <view class="tr bg-w">
+                  <view class="th ">操作人</view>
+                  <view class="th ">时间</view>
+                  <view class="th "></view>
+                </view>
+                <block wx:for="{{logs}}" wx:key="{{ID}}">
+                  <view class="tr {{(index+1) % 2 == 0 ? 'bg-g' : ''}} ">
+                    <view class="td">{{item.INITIAL_USR}}</view>
+                    <view class="td">{{item.INITIAL_DT}}</view>
+                    <view class="td "></view>
+                  </view>
+                </block>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+      </view>
+    </block>
+    <block wx:for="{{order}}" wx:for-index="idx" wx:key="{{PROD_BASIC_ID}}">
+      <view class="splited"></view>
+      <view wx:if="{{idx==0}}" class="item">
+        <view class="item-image" style="background-color:#4682B4;">
+          <image src="/image/order.png"></image>
+        </view>
+        <view class="item-txt">
+          <view>订单信息</view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>订单号:</view>
+          <view class="item-val-fbd color-red">
+            {{item.ORDER_NO}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>客户名称:</view>
+          <view class="item-val">
+            {{item.PARTNER_NME}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>订单信息:</view>
+          <view class="item-val">
+            {{item.PROD_INFO}}
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>订单要求:</view>
+          <view class="item-val">
+            {{item.PROD_REMARKS}}
+          </view>
+        </view>
+      </view>
+    </block>
+    <block wx:if="{{order.length > 0}}">
+      <view class="splited"></view>
+      <view class="item">
+        <view class="item-image" style="background-color:#7B68EE;">
+          <image src="/image/idea.png"></image>
+        </view>
+        <view class="item-txt">
+          <view>订单要求</view>
+        </view>
+      </view>
+      <view class="flex-wrp flex-center">
+        <image src="{{img_src}}" bindtap='previewImg' mode='aspectFit'></image>
+      </view>
+    </block>
+    <view class="splited"></view>
+  </view>
+</view>
+<view class="page-bottom">
+  <view class="top-tab flex-wrp flex-center work-cust">
+    <view class="flex-item flex-center" bindtap="scan">
+      <image src="/image/Scanner.png"></image>扫 码
+    </view>
+    <view wx:if="{{SID!=''}}" class="flex-item flex-center yellow" bindtap='showModel'>
+      <image src="/image/upload.png"></image>作 业
+    </view>
+  </view>
+</view>
+
+<!--弹出窗-->
+<view class="module-bg-layer" wx:if="{{show_module}}">
+  <view class="dv-module">
+    <form bindsubmit="Submit">
+      <view class="page-section">
+        <view class="item flex-center color-grey title-cust">
+          <view class="item-image">
+            <image src="/image/Settings.png"></image>
+          </view>岗位数据提交
+        </view>
+        <view class="item">
+          <view class="item-txt">
+            <view class="color-grey">实际收货量</view>
+          </view>
+          <view class="item-right">
+            <input type="number" name="ACT_IN_QTY" style='text-align:right;font-size:35rpx;' bindblur='onInputSuccess' placeholder="请输入数量" />
+          </view>
+        </view>
+        <view class="item">
+          <view class="item-txt">
+            <view class="color-grey">实际出货量</view>
+          </view>
+          <view class="item-right">
+            <input type="number" name="ACT_OUT_QTY" style='text-align:right;font-size:35rpx;' bindblur='onInputSuccess' placeholder="请输入数量" />
+          </view>
+        </view>
+        <view class="item">
+          <view class="item-txt">
+            <view class="color-grey">实际放数</view>
+          </view>
+          <view class="item-right">
+            <input type="number" name="ACT_WASTE_QTY" style='text-align:right;font-size:35rpx;' bindblur='onInputSuccess' placeholder="请输入数量" />
+          </view>
+        </view>
+      </view>
+      <view class="cust-btn">
+        <button type="primary" disabled='{{isUsed}}' formType="submit">提 交</button>
+        <button bindtap="CloseModel">关 闭</button>
+      </view>
+    </form>
+  </view>
+</view>

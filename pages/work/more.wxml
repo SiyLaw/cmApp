@@ -1,0 +1,21 @@
+<!--pages/work/more.wxml-->
+<import src="/comm/loading.wxml" />
+<view class="container">
+  <template is="pageloading" data="{{hideclass:hideclass,realhide:realhide}}" />
+  <view class="table">
+    <view class="table-body">
+      <view class="tr bg-w">
+        <view class="th">工单号</view>
+        <view class="th">岗位</view>
+        <view class="th">时间</view>
+      </view>
+      <block wx:for="{{logs}}" wx:key="{{ID}}">
+        <view class="tr {{(index+1) % 2 == 0 ? 'bg-g' : ''}} ">
+          <view class="td lightGreen" data-id='{{item.ID}}' data-sc="{{item.SC}}" data-sn="{{item.SN}}" bindtap='navtoWork'>{{item.WSN}}</view>
+          <view class="td">{{item.SN}}</view>
+          <view class="td">{{item.DT}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

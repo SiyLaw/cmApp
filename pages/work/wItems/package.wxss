@@ -1,0 +1,17 @@
+/* pages/work/DB/db_main.wxss */
+
+.work-cust {
+  background-color: #228b22;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: bold;
+  line-height: 100rpx;
+  height: 100rpx;
+}
+
+.title-cust {
+  font-size: 32rpx;
+  padding: 15rpx 10rpx;
+  background-color: #1E90FF;
+  color: #eee;
+}

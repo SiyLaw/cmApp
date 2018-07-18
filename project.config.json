@@ -1,0 +1,56 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.94",
+	"appid": "wxa030ca7455097c75",
+	"projectname": "CmApp",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "打包",
+					"pathName": "pages/work/wItems/package",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "fun_list",
+					"pathName": "pages/work/items",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "scanSettings",
+					"pathName": "pages/work/wItems/scanSettings",
+					"query": "tp=YS&nme=印刷岗"
+				}
+			]
+		}
+	}
+}

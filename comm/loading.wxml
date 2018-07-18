@@ -1,0 +1,22 @@
+<template name="pageloading">
+  <view class="page-loading {{hideclass}}" wx:if="{{!realhide}}">
+    <div class="loading-center">
+      <div class="masked">
+        重庆聖立印务
+      </div>
+      <div class="loading-center-absolute">
+        <div class="object"></div>
+        <div class="object"></div>
+        <div class="object"></div>
+        <div class="object"></div>
+        <div class="object"></div>
+        <div class="object"></div>
+        <div class="object"></div>
+        <div class="object"></div>
+        <div class="object"></div>
+        <div class="object"></div>
+      </div>
+    </div>
+    加载中...
+  </view>
+</template>
