@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.94",
+	"libVersion": "2.2.0",
 	"appid": "wxa030ca7455097c75",
 	"projectname": "CmApp",
 	"isGameTourist": false,
@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 3,
 			"list": [
 				{
 					"id": 0,
@@ -49,6 +49,12 @@
 					"name": "scanSettings",
 					"pathName": "pages/work/wItems/scanSettings",
 					"query": "tp=YS&nme=印刷岗"
+				},
+				{
+					"id": -1,
+					"name": "truck",
+					"pathName": "pages/work/wItems/truck",
+					"query": ""
 				}
 			]
 		}

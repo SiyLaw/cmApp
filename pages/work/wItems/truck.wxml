@@ -1,2 +1,56 @@
 <!--pages/work/wItems/truck.wxml-->
-<text>pages/work/wItems/truck.wxml</text>
+<view class="content-fixed-top">
+  <view class="tabs">
+    <view class="{{tab_scan?'item':'selecteditem'}}" data-type="NS" bindtap='changeTab'>待扫码</view>
+    <view class="{{tab_scan?'selecteditem':'item'}}" data-type="HS" bindtap='changeTab'>已扫码</view>
+  </view>
+  <view class="page-section">
+    <view class="item">
+      <view class="item-image" style="background-color:#4682B4;">
+        <image src="/image/date.png"></image>
+      </view>
+      <picker mode="date" value="{{fdate}}" bindchange="bindDateChange" style='width:100%;'>
+        <view class="item-txt">
+          <view>发货日期</view>
+          <view>
+            {{fdate}}
+          </view>
+        </view>
+      </picker>
+    </view>
+  </view>
+</view>
+<scroll-view class="sv-content" style="height:{{height-rpxrate*210}}px;" scroll-x="{{false}}" scroll-y="{{true}}">
+  <block wx:for="{{menu}}" wx:for-index="idx" wx:key="item.id">
+    <view class="cpt-main" wx:if="{{(quickmenu[date] =='全部' || item.txt == quickmenu[date])}}" style="border-top-color:{{COLOR[idx%COLOR.length]}};">
+      <view class="cpt-item" style="background:linear-gradient(to left,{{COLOR[idx%COLOR.length]}},#fff);">
+        <view class="cpt-img">
+          <image src='/image/dot.png' style="background-color:{{COLOR[idx%COLOR.length]}};"></image>
+        </view>
+        <text class="cpt-head1" style="color:{{COLOR[idx%COLOR.length]}};">{{item.txt}}</text>
+        <view class="cpt-opt1">
+          <image src='/image/coderwall.png'></image>
+        </view>
+      </view>
+      <block wx:for="{{menu[idx].item}}" wx:for-item="it" wx:for-index="itdx" wx:key="it.id">
+        <navigator url="lawContent?id={{it.id}}&nme={{it.txt}}">
+          <view class="cpt-main-item">
+            <view class="cpt-item" style="{{itdx==menu[idx].item.length-1?'border-bottom:none;':''}}">
+              <view class="cpt-content">
+                <view class="cpt-head">
+                  <text>{{it.txt}}</text>
+                </view>
+                <view class="cpt-detail">
+                  <text class="cpt-txt">{{it.bd}}{{it.bt}}</text>
+                </view>
+              </view>
+              <view class="cpt-opt">
+                <image src='/image/dright.png'></image>
+              </view>
+            </view>
+          </view>
+        </navigator>
+      </block>
+    </view>
+  </block>
+</scroll-view>

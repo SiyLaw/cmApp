@@ -1,1 +1,138 @@
 /* pages/work/wItems/truck.wxss */
+
+.content-fixed-top {
+  position: fixed;
+  top: 0rpx;
+  left: 0rpx;
+  width: 100%;
+  height: 182rpx;
+}
+
+.sv-content {
+  position: fixed;
+  top: 182rpx;
+  left: 0rpx;
+  width: 100%;
+  background-color: #f5f5f5;
+}
+
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 100rpx;
+  width: 100%;
+  padding-top: 0rpx;
+  background-color: #fff;
+  z-index: 20000;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 34rpx;
+}
+
+.tabs .item {
+  padding: 10rpx 10rpx;
+  color: #666;
+  border-bottom:5rpx solid #fff;
+}
+
+.tabs .selecteditem {
+  padding: 10rpx 10rpx;
+  color: #7587db;
+  border-bottom:5rpx solid #7587db;
+}
+
+
+.cpt-main {
+  margin-bottom: 20rpx;
+  background-color: #fff;
+  border-top: 3rpx solid #ddd;
+  border-bottom: 1rpx solid #ddd;
+}
+.cpt-main-item {
+  padding-left: 40rpx;
+}
+
+.cpt-item {
+  border-bottom: 1rpx solid #ddd;
+  padding: 20rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cpt-img {
+  margin: 10rpx 30rpx 15rpx 20rpx;
+}
+
+.cpt-img image {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 100%;
+  box-shadow: 0rpx 0rpx 0rpx 2rpx #555;
+}
+
+.cpt-opt {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 50rpx;
+  font-weight: bolder;
+}
+
+.cpt-opt image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.cpt-opt1 {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.cpt-opt1 image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.cpt-content {
+  flex-grow: 2;
+}
+
+.cpt-head {
+  color: #696969;
+  font-size: 30rpx;
+  font-weight: bolder;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  letter-spacing: 5rpx;
+}
+.cpt-head1 {
+  color: #696969;
+  font-size: 36rpx;
+  font-weight: bolder;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  letter-spacing: 5rpx;
+}
+
+.cpt-detail {
+  padding: 15rpx 0rpx;
+}
+
+.cpt-txt {
+  font-size: 26rpx;
+  color: #808080;
+}

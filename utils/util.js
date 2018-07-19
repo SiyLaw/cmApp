@@ -6,6 +6,9 @@ function formatTime(date, stype) {
 
   if (stype == "date") {
     return [month, day].map(formatNumber).join('-')
+  } 
+  else if (stype == "fulldate") {
+    return [year,month, day].map(formatNumber).join('-')
   }
   else {
     var hour = date.getHours()
