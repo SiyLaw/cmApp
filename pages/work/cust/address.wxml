@@ -1,0 +1,20 @@
+<!--pages/work/cust/address.wxml-->
+<import src="/comm/loading.wxml" />
+<template is="pageloading" data="{{hideclass:hideclass,realhide:realhide}}" />
+<scroll-view class="sv-content" style="height:{{height}}px;" scroll-x="{{false}}" scroll-y="{{true}}">
+  <block wx:for="{{address}}" wx:for-item="oit" wx:for-index="iodx" wx:key="oit.ID">
+    <view class="cpt-main" style="border-top:1px solid {{COLOR[iodx%COLOR.length]}};" data-id='{{oit.ID}}' bindtap='bindEditItem'>
+      <view class="cpt-item">
+        <view class="cpt-content">
+          <view class="cpt-head cust-txt">
+            <view>{{oit.CN}}</view>
+            <view style='font-weight:normal;'>{{oit.TEL}}</view>
+          </view>
+          <view>
+              <text class="cpt-txt cust-txt">{{oit.CITY}} {{oit.PROVINCE}} {{oit.COUNTRY_CDE}} {{oit.ADDR}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</scroll-view>

@@ -1,8 +1,13 @@
 <!--pages/work/wItems/truck.wxml-->
+<import src="/comm/loading.wxml" />
+<template is="pageloading" data="{{hideclass:hideclass,realhide:realhide}}" />
 <view class="content-fixed-top">
   <view class="tabs">
     <view class="{{tab_scan?'item':'selecteditem'}}" data-type="NS" bindtap='changeTab'>待扫码</view>
     <view class="{{tab_scan?'selecteditem':'item'}}" data-type="HS" bindtap='changeTab'>已扫码</view>
+    <view bindtap='bindRefresh'>
+      <image src="/image/Refresh.png"></image>
+    </view>
   </view>
   <view class="page-section">
     <view class="item">
@@ -17,12 +22,15 @@
           </view>
         </view>
       </picker>
+      <view class="item-image cust-img" bindtap='bindChangeStyle'>
+        <image src="/image/Checklist{{cate_show?'2':''}}.png"></image>
+      </view>
     </view>
   </view>
 </view>
-<scroll-view class="sv-content" style="height:{{height-rpxrate*210}}px;" scroll-x="{{false}}" scroll-y="{{true}}">
-  <block wx:for="{{menu}}" wx:for-index="idx" wx:key="item.id">
-    <view class="cpt-main" wx:if="{{(quickmenu[date] =='全部' || item.txt == quickmenu[date])}}" style="border-top-color:{{COLOR[idx%COLOR.length]}};">
+<scroll-view class="sv-content" style="height:{{height-rpxrate*182-rpxrate*100}}px;" scroll-x="{{false}}" scroll-y="{{true}}">
+  <block wx:if="{{cate_show}}" wx:for="{{deliItems}}" wx:for-index="idx" wx:key="idx">
+    <view wx:if="{{(item.HS != '0' && tab_scan) || item.HS != '1' && !tab_scan}}" class="cpt-main" style="border-top-color:{{COLOR[idx%COLOR.length]}};">
       <view class="cpt-item" style="background:linear-gradient(to left,{{COLOR[idx%COLOR.length]}},#fff);">
         <view class="cpt-img">
           <image src='/image/dot.png' style="background-color:{{COLOR[idx%COLOR.length]}};"></image>
@@ -32,25 +40,109 @@
           <image src='/image/coderwall.png'></image>
         </view>
       </view>
-      <block wx:for="{{menu[idx].item}}" wx:for-item="it" wx:for-index="itdx" wx:key="it.id">
-        <navigator url="lawContent?id={{it.id}}&nme={{it.txt}}">
-          <view class="cpt-main-item">
-            <view class="cpt-item" style="{{itdx==menu[idx].item.length-1?'border-bottom:none;':''}}">
+      <block wx:for="{{item.detail}}" wx:for-item="it" wx:for-index="itdx" wx:key="it.AI">
+        <block wx:if="{{((it.IFS == '1' || it.SC > 0) && tab_scan) || (it.IFS == '0' && !tab_scan)}}" wx:for="{{order}}" wx:for-item="oit" wx:for-index="iodx" wx:key="oit.PROD_BASIC_ID">
+          <view wx:if="{{it.PID == oit.PROD_BASIC_ID}}" class="cpt-main-item" data-id='{{oit.PROD_BASIC_ID}}' bindtap='bindOrderShowDetail'>
+            <view class="cpt-item">
               <view class="cpt-content">
                 <view class="cpt-head">
-                  <text>{{it.txt}}</text>
+                  <view>{{oit.ORDER_NO}} [{{oit.PROD_TYPE}}]</view>
+                  <view style='font-weight:normal;'>件数:{{oit.PROD_CNT}}</view>
                 </view>
-                <view class="cpt-detail">
-                  <text class="cpt-txt">{{it.bd}}{{it.bt}}</text>
+                <view class="cpt-detail {{it.SC>0&&it.PC!=it.SC ? 'bg-warring':''}}">
+                  <text class="cpt-txt">发货:{{oit.RECEIVE_DT}} 件数:{{it.PDC}} 打包:<text class="cust-red">{{it.PC=="0"?"-":it.PC}}</text> 扫码:<text class="cust-red">{{it.SC=="0"?"-":it.SC}}</text></text>
                 </view>
-              </view>
-              <view class="cpt-opt">
-                <image src='/image/dright.png'></image>
               </view>
             </view>
+            <view>
+              <block wx:for="{{packages}}" wx:for-item="pit" wx:for-index="ipdx" wx:key="pit.PACKAGING_ID">
+                <view wx:if="{{oit.PROD_BASIC_ID == pit.PROD_BASIC_ID && pit.ADDRESS_ID == it.AI}}" class="cpt-txt cust-txt" style="display:{{oit.show?'flex':'none'}};" catchtap='selected' data-id="{{pit.PACKAGING_ID}}">
+                  <image src="/image/{{pit.IS_SCAN=='0'?'dis':(pit.CONFIRM=='1'?'':'un')}}autonext.png"></image>
+                  <label>{{pit.PER_PACKAGE_PROD_CNT}}{{pit.IS_SCAN == '1'?'-已扫'+(pit.CONFIRM == '1'?'-等待发货':''):''}}</label>
+                </view>
+              </block>
+            </view>
           </view>
-        </navigator>
+        </block>
       </block>
     </view>
   </block>
+  <block wx:if="{{!cate_show}}">
+    <block wx:for="{{order}}" wx:for-item="oit" wx:for-index="iodx" wx:key="oit.PROD_BASIC_ID">
+      <view wx:if="{{(oit.HS != '0' && tab_scan) || (oit.HS != '1' && !tab_scan)}}" class="cpt-main" style="border-top:2px solid {{COLOR[iodx%COLOR.length]}};" data-id='{{oit.PROD_BASIC_ID}}' bindtap='bindOrderShowDetail'>
+        <view class="cpt-item">
+          <view class="cpt-content">
+            <view class="cpt-head">
+              <view>{{oit.ORDER_NO}} [{{oit.PROD_TYPE}}]</view>
+              <view style='font-weight:normal;'>件数:{{oit.PROD_CNT}}</view>
+            </view>
+            <block wx:for="{{delivery}}" wx:for-item="dit" wx:for-index="iddx" wx:key="dit.ADDRESS_ID">
+              <view wx:if="{{dit.PROD_BASIC_ID == oit.PROD_BASIC_ID}}">
+                <view class="cpt-txt cust-txt txt-border">地址：{{dit.CITY?dit.CITY+'·'+dit.PROVINCE+'·'+dit.COUNTRY_CDE:'客户自提'}}</view>
+                <view class="{{dit.SCAN_CNT>0&&dit.PACKAGEING_CNT!=dit.SCAN_CNT ? 'bg-warring':''}}">
+                  <text class="cpt-txt cust-txt">发货:{{oit.RECEIVE_DT}} 件数:{{dit.PD_CNT}} 打包:<text class="cust-red">{{dit.PACKAGEING_CNT=="0"?"-":dit.PACKAGEING_CNT}}</text> 扫码:<text class="cust-red">{{dit.SCAN_CNT=="0"?"-":dit.SCAN_CNT}}</text></text>
+                </view>
+              </view>
+              <view>
+                <block wx:for="{{packages}}" wx:for-item="pit" wx:for-index="ipdx" wx:key="pit.PACKAGING_ID">
+                  <view wx:if="{{oit.PROD_BASIC_ID == pit.PROD_BASIC_ID && pit.ADDRESS_ID == dit.ADDRESS_ID}}" class="cpt-txt cust-txt" style="display:{{oit.show?'flex':'none'}};" catchtap='selected' data-id="{{pit.PACKAGING_ID}}">
+                    <image src="/image/{{pit.IS_SCAN=='0'?'dis':(pit.CONFIRM=='1'?'':'un')}}autonext.png"></image>
+                    <label>{{pit.PER_PACKAGE_PROD_CNT}}{{pit.IS_SCAN == '1'?'-已扫'+(pit.CONFIRM == '1'?'-等待发货':''):''}}</label>
+                  </view>
+                </block>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </block>
+  </block>
+  <view class='splited'></view>
 </scroll-view>
+<view class="page-bottom">
+  <view class="top-tab flex-wrp flex-center work-cust">
+    <view class="flex-item flex-center" style="display:{{tab_scan?'none':'flex'}};" bindtap="scan">
+      <image src="/image/Scanner.png"></image>扫 码
+    </view>
+    <view class="flex-item flex-center yellow" style="display:{{tab_scan?'flex':'none'}};" bindtap='showModel'>
+      <image src="/image/confirm.png"></image>发货确认
+    </view>
+  </view>
+</view>
+
+<!--弹出窗-->
+<view class="module-bg-layer" wx:if="{{show_module}}">
+  <view class="dv-module">
+    <form bindsubmit="Submit">
+      <view class="page-section">
+        <view class="item flex-center color-grey title-cust">
+          <view class="item-image">
+            <image src="/image/Settings.png"></image>
+          </view>发货确认
+        </view>
+        <view class="item">
+          <view class="item-txt">
+            <view class="color-grey">实际发货包数</view>
+          </view>
+          <view class="item-right">
+            {{iCount}}包
+          </view>
+        </view>
+        <view class="item">
+          <view class="item-txt">
+            <view class="color-grey">检查提示</view>
+          </view>
+          <view class="item-right">
+          </view>
+        </view>
+        <scroll-view scroll-y="{{true}}" style='height:200rpx;'>
+          <label class="cpt-txt" style="white-space: pre-line;">{{checkDetail}}</label>
+        </scroll-view>
+      </view>
+      <view class="cust-btn">
+        <button type="primary" disabled='{{isUsed}}' formType="submit">确认&打印</button>
+        <button bindtap="CloseModel">关 闭</button>
+      </view>
+    </form>
+  </view>
+</view>

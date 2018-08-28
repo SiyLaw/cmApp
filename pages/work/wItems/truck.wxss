@@ -1,5 +1,15 @@
 /* pages/work/wItems/truck.wxss */
 
+.cust-img {
+  margin-right: 10rpx;
+  margin-left: 10rpx;
+}
+
+.cust-img image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
 .content-fixed-top {
   position: fixed;
   top: 0rpx;
@@ -15,7 +25,6 @@
   width: 100%;
   background-color: #f5f5f5;
 }
-
 
 .tabs {
   display: flex;
@@ -34,15 +43,20 @@
 .tabs .item {
   padding: 10rpx 10rpx;
   color: #666;
-  border-bottom:5rpx solid #fff;
+  border-bottom: 5rpx solid #fff;
+}
+
+.tabs image {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 100%;
 }
 
 .tabs .selecteditem {
   padding: 10rpx 10rpx;
   color: #7587db;
-  border-bottom:5rpx solid #7587db;
+  border-bottom: 5rpx solid #7587db;
 }
-
 
 .cpt-main {
   margin-bottom: 20rpx;
@@ -50,13 +64,14 @@
   border-top: 3rpx solid #ddd;
   border-bottom: 1rpx solid #ddd;
 }
+
 .cpt-main-item {
   padding-left: 40rpx;
 }
 
 .cpt-item {
-  border-bottom: 1rpx solid #ddd;
-  padding: 20rpx 20rpx;
+  border-top: 1rpx solid #ddd;
+  padding: 10rpx 10rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -71,7 +86,8 @@
   width: 20rpx;
   height: 20rpx;
   border-radius: 100%;
-  box-shadow: 0rpx 0rpx 0rpx 2rpx #555;
+  box-shadow: 0rpx 0rpx 1rpx 2rpx #ddd;
+  border: none;
 }
 
 .cpt-opt {
@@ -114,9 +130,9 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: flex-start;
-  letter-spacing: 5rpx;
+  justify-content: space-between;
 }
+
 .cpt-head1 {
   color: #696969;
   font-size: 36rpx;
@@ -129,10 +145,56 @@
 }
 
 .cpt-detail {
-  padding: 15rpx 0rpx;
+  padding: 0rpx 0rpx;
 }
 
 .cpt-txt {
   font-size: 26rpx;
   color: #808080;
+}
+.cpt-txt image {
+  width: 45rpx;
+  height: 45rpx;
+}
+
+.cust-txt{
+  padding-left: 50rpx;
+  padding-bottom: 5rpx;
+}
+.txt-border{
+  font-weight: bold;
+}
+.cpt-txt checkbox{
+  margin-bottom: 5rpx;
+}
+
+.bg-warring{
+  background-color:#FFA500;
+}
+
+.work-cust {
+  background-color: #228b22;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: bold;
+  line-height: 100rpx;
+  height: 100rpx;
+}
+
+.yellow {
+  background-color: #ffa500;
+}
+
+.cust-red {
+  color: red;
+  font-weight: bolder;
+  padding: 2rpx 5rpx;
+  font-size: 30rpx;
+}
+
+.title-cust {
+  font-size: 32rpx;
+  padding: 15rpx 10rpx;
+  background-color: #1E90FF;
+  color: #eee;
 }

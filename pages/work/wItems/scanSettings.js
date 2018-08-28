@@ -52,7 +52,7 @@ Page({
         })
       });
     }
-    setTimeout(function () {
+    setTimeout(function() {
       that.setData({
         realhide: true
       });
@@ -118,9 +118,30 @@ Page({
     })
   },
   showModel: function(e) {
-    this.setData({
-      show_module: true
-    })
+    switch (this.data.TYPE_CDE) {
+      case "lz":
+        var jsPost = new util.jsonRow()
+        jsPost.AddCell("SID", this.data.SID)
+        util.Post(this, "CONFIRM_LZ", jsPost, function (that, data, mod) {
+          wx.showToast({
+            title: '领纸成功！',
+          })
+        });
+        break;
+      case "lb":
+        var jsPost = new util.jsonRow()
+        jsPost.AddCell("SID", this.data.SID)
+        util.Post(this, "CONFIRM_LB", jsPost, function (that, data, mod) {
+          wx.showToast({
+            title: '领版成功！',
+          })
+        });
+        break;
+      default:
+        this.setData({
+          show_module: true
+        })
+    }
   },
   CloseModel: function(e) {
     this.setData({

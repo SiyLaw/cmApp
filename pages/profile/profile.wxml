@@ -1,0 +1,78 @@
+<!--pages/profile/profile.wxml-->
+<import src="/comm/loading.wxml" />
+<import src="/comm/user.wxml" />
+<view class="container">
+<template is="UserInfo" data="{{avatarUrl: userInfo.avatarUrl,nickName:userInfo.nickName}}" />
+<view class="page-section page-section-gap">
+    <view class="item-total">
+      <view class="titem">
+        <view class="item-head">{{info[0].US}}</view>
+        <view class="item-desc">消费金额</view>
+      </view>
+      <view class="titem">
+        <view class="item-head">{{info[0].DT}}条</view>
+        <view class="item-desc">待支付金额</view>
+      </view>
+      <view class="titem">
+        <view class="item-head">{{info[0].RATE}}%</view>
+        <view class="item-desc">信用度</view>
+      </view>
+    </view>
+  </view>
+  <view class="page-section" wx:for="{{items}}" wx:key="item.id">
+    <view wx:if="{{item.spilted}}" class='splited'></view>
+    <view class="item" wx:if="{{item.ty == 'url'}}" data-url="{{item.url}}" bindtap='navtourl'>
+      <view class="item-image" style="background-color:{{item.color}};">
+        <image src="{{item.img}}"></image>
+      </view>
+      <view class="{{item.spilted?'item-txt':'item-txt2'}}">
+        <view>{{item.txt}}</view>
+        <view class="item-val">{{info[0][item.val]}}</view>
+      </view>
+    </view>
+    <view class="item" wx:if="{{item.ty == 'txt'}}">
+      <view class="item-image" style="background-color:{{item.color}};">
+        <image src="{{item.img}}"></image>
+      </view>
+      <view class="{{item.spilted?'item-txt':'item-txt2'}}">
+        <view>{{item.txt}}</view>
+        <view class="item-val">{{info[0][item.val]}}</view>
+      </view>
+    </view>
+    <view class="item" wx:if="{{item.ty == 'pick'}}">
+      <view class="item-image" style="background-color:{{item.color}};">
+        <image src="{{item.img}}"></image>
+      </view>
+      <view class="{{item.spilted?'item-txt':'item-txt2'}}">
+        <picker wx:if="{{item.op[0]['value']=='region'}}" mode="{{item.op[0]['mode']}}" bindchange="{{item.op[0]['bindchange']}}" value="{{region[item.op[0]['value']]}}" style='width:100%;'>
+          <view class='item-pick'>
+            <view class="pick-txt">{{item.txt}}</view>
+            <view class="pick-val">{{info[0][item.val]}}</view>
+          </view>
+        </picker>
+        <picker wx:if="{{item.op[0]['value']=='eclass'}}" mode="{{item.op[0]['mode']}}" bindchange="{{item.op[0]['bindchange']}}" range="{{region[item.op[0]['value']]}}" range-key='txt' style='width:100%;'>
+          <view class='item-pick'>
+            <view class="pick-txt">{{item.txt}}</view>
+            <view wx:for="{{region.eclass}}" wx:key="$this" wx:for-item="sitem" wx:if="{{sitem.id == info[0][item.val]}}" class="pick-val">{{sitem.txt}}</view>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="item" wx:if="{{item.ty == 'fun'}}" bindtap="{{item.bindfun}}">
+      <view class="item-image" style="background-color:{{item.color}};">
+        <image src="{{item.img}}"></image>
+      </view>
+      <view class="{{item.spilted?'item-txt':'item-txt2'}}">
+        <view>{{item.txt}}</view>
+        <view class="item-val">{{info[0][item.val]}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='splited'></view>
+  <form catchsubmit="formSubmit">
+    <input style="display:none;" name="HEAD_IMG" type="text" value="{{HEAD_IMG}}" />
+    <view class="page-section">
+    </view>
+  </form>
+</view>
+    

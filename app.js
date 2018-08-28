@@ -40,7 +40,7 @@ App({
     var that = this
     var user = wx.getStorageSync('user') || {};
     var code = wx.getStorageSync('code') || '';
-    if (!user.nickName || code == '') {
+    if (user.nickName == undefined || user.nickName == '' || code == '') {
       //调用登录接口
       wx.login({
         success: function(res) {
@@ -48,13 +48,13 @@ App({
             that.globalData.code = res.code;
             wx.setStorageSync('code', res.code); //userInfo
             typeof doAfter == "function" && doAfter()
-            // wx.getUserInfo({
-            //   success: function(res2) {
-            //     that.globalData.userInfo = res2.userInfo;
-            //     wx.setStorageSync('user', res2.userInfo); //userInfo
-            //     typeof doGetUser == "function" && doGetUser(res2.userInfo)
-            //   }
-            // })
+            wx.getUserInfo({
+              success: function(res2) {
+                that.globalData.userInfo = res2.userInfo;
+                wx.setStorageSync('user', res2.userInfo); //userInfo
+                typeof doGetUser == "function" && doGetUser(res2.userInfo)
+              }
+            })
           } else {
             wx.showModal({
               title: '错误',
@@ -101,8 +101,8 @@ App({
     url: 'https://www.cqcaimei.cn/wxget.axd',
     uploadurl: 'https://www.cqcaimei.cn/wxupload.axd',
     bseurl: 'https://www.cqcaimei.cn/'
-    //url: 'http://localhost/stlcms/wxget.axd',
-    //uploadurl: 'http://localhost/stlcms/wxupload.axd',
-    //bseurl: 'http://localhost/stlcms/'
+    // url: 'http://localhost/stlcms/wxget.axd',
+    // uploadurl: 'http://localhost/stlcms/wxupload.axd',
+    // bseurl: 'http://localhost/stlcms/'
   }
 })

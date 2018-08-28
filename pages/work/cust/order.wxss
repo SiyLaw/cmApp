@@ -1,0 +1,26 @@
+/* pages/work/cust/order.wxss */
+/* pages/work/wItems/scanSettings.wxss */
+.work-cust {
+  background-color: #228b22;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: bold;
+  line-height: 100rpx;
+  height: 100rpx;
+}
+
+.yellow {
+  background-color: #FFA500;
+}
+.color-grey{
+  min-width: 47px;
+  text-align: right;
+}
+
+.title-cust {
+  font-size: 32rpx;
+  padding: 15rpx 10rpx;
+  background-color: #1E90FF;
+  color: #eee;
+}
+

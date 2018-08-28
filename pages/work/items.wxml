@@ -1,15 +1,29 @@
 <!--pages/work/items.wxml-->
+<import src="/comm/loading.wxml" />
+<template is="pageloading" data="{{hideclass:hideclass,realhide:realhide}}" />
 <view class="fun-list">
   <block wx:for="{{showItems}}" wx:key="{{item.txt}}">
-    <navigator open-type="navigate" url="{{item.url}}" hover-class="none">
-      <view class="item">
-        <view class="item-image">
-          <image src="{{item.img}}"></image>
+    <view style='width:33.3%;'>
+      <navigator open-type="navigate" url="{{item.url}}" hover-class="none">
+        <view class="item">
+          <view class="item-image" style="background-color:{{item.color}};">
+            <image src="{{item.img}}"></image>
+          </view>
+          <view class="item-txt">
+            {{item.txt}}
+          </view>
         </view>
-        <view class="item-txt">
-          {{item.txt}}
-        </view>
-      </view>
-    </navigator>
+      </navigator>
+    </view>
   </block>
+  <view wx:if="{{showItems.length == 0}}" style='width:33.3%;'>
+    <view class="item">
+      <view class="item-image" style="background-color:#FF8C00;">
+        <image src="../../image/ops.png"></image>
+      </view>
+      <view class="item-txt">
+        暂未配置功能
+      </view>
+    </view>
+  </view>
 </view>

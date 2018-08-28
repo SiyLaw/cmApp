@@ -1,0 +1,46 @@
+<!--pages/work/cust/orderlist.wxml-->
+<import src="/comm/loading.wxml" />
+<template is="pageloading" data="{{hideclass:hideclass,realhide:realhide}}" />
+<view class="content-fixed-top">
+  <view class="tabs">
+    <view class="{{tab_status=='0'?'selecteditem':'item'}}" data-type="0" bindtap='changeTab'>全部</view>
+    <view class="{{tab_status=='1'?'selecteditem':'item'}}" data-type="1" bindtap='changeTab'>待收货</view>
+    <view class="{{tab_status=='2'?'selecteditem':'item'}}" data-type="2" bindtap='changeTab'>待评价</view>
+    <view class="{{tab_status=='3'?'selecteditem':'item'}}" data-type="3" bindtap='changeTab'>已完成</view>
+    <view bindtap='bindRefresh'>
+      <image src="/image/Refresh.png"></image>
+    </view>
+  </view>
+  <view class="page-section">
+    <view class="item">
+      <view class="item-image" style="background-color:#FF6347;">
+        <image src="/image/date.png"></image>
+      </view>
+      <picker mode="date" value="{{fdate}}" bindchange="bindDateChange" style='width:100%;'>
+        <view class="item-txt">
+          <view>发货日期</view>
+          <view>
+            {{fdate}}
+          </view>
+        </view>
+      </picker>
+    </view>
+  </view>
+</view>
+<scroll-view class="sv-content" style="height:{{height-rpxrate*182}}px;" scroll-x="{{false}}" scroll-y="{{true}}">
+  <block wx:for="{{orders}}" wx:for-item="oit" wx:for-index="iodx" wx:key="oit.PROD_BASIC_ID">
+    <view wx:if="{{(oit.HS == tab_status)}}" class="cpt-main" style="border-top:1px solid {{COLOR[iodx%COLOR.length]}};" data-id='{{oit.PROD_BASIC_ID}}' bindtap='bindOrderShowDetail'>
+      <view class="cpt-item">
+        <view class="cpt-content">
+          <view class="cpt-head">
+            <view>{{oit.ORDER_NO}} [{{oit.PROD_TYPE}}]</view>
+            <view style='font-weight:normal;'>{{oit.SC}}</view>
+          </view>
+          <view>
+              <text class="cpt-txt cust-txt">预计发货:{{oit.RECEIVE_DT}} 件数:{{oit.PROD_CNT}} 总金额:{{oit.P_AMT}}元</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</scroll-view>

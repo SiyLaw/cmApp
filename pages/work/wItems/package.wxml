@@ -75,8 +75,8 @@
         <view>待打包</view>
       </view>
     </view>
-    <view class="item-sub" wx:if="{{item.IS_PACKAGED == undefined || item.IS_PACKAGED == '0'}}" wx:for="{{items}}" wx:for-index="idx" wx:key="{{ADDRESS_ID}}" data-idx="{{idx}}" bindtap='showPackageModel'>
-      <view class="item-txt">
+    <view class="item-sub" wx:for="{{items}}" wx:for-index="idx" wx:key="{{ADDRESS_ID}}" wx:if="{{item.IS_PACKAGED == undefined || item.IS_PACKAGED == '0'}}" data-idx="{{idx}}" bindtap='showPackageModel'>
+      <view class="item-txt" >
         <view class="item-val">
           {{item.CONSIGNEE}}-{{item.TEL}}-{{item.ADDR_LABEL}}
         </view>
@@ -96,7 +96,7 @@
         <view>已打包</view>
       </view>
     </view>
-    <view class="item-sub" wx:for="{{items}}" wx:if="{{item.IS_PACKAGED == '1'}}" wx:for-index="idx" wx:key="{{ADDRESS_ID}}">
+    <view class="item-sub" wx:for="{{items}}" wx:for-index="idx" wx:key="{{ADDRESS_ID}}" wx:if="{{item.IS_PACKAGED == '1'}}" data-idx="{{idx}}" bindlongtap='showFunAction'>
       <view class="item-txt">
         <view class="item-val">
           {{item.CONSIGNEE}}-{{item.TEL}}-{{item.ADDR_LABEL}}

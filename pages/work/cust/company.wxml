@@ -1,0 +1,84 @@
+<!--pages/work/cust/company.wxml-->
+<import src="/comm/loading.wxml" />
+<view class='container' style='padding-bottom:110rpx;'>
+  <template is="pageloading" data="{{hideclass:hideclass,realhide:realhide}}" />
+  <view class="page-section">
+    <block wx:for="{{company}}" wx:for-index="idx" wx:key="{{item.CDE}}">
+      <view class="splited"></view>
+      <view wx:if="{{idx==0}}" class="item">
+        <view class="item-image" style="background-color:#4682B4;">
+          <image src="/image/order.png"></image>
+        </view>
+        <view class="item-txt">
+          <view>公司信息</view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>公司简称:</view>
+          <view class="item-val-fbd color-red">
+            {{item.P_NME}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>公司全称:</view>
+          <view class="item-val">
+            {{item.P_F_NME}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>联系人:</view>
+          <view class="item-val">
+            {{item.CC}}
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>联系电话:</view>
+          <view class="item-val">
+            {{item.PN}}
+          </view>
+        </view>
+      </view>
+      <view class="splited"></view>
+      <view class="item">
+        <view class="item-image" style="background-color:#7B68EE;">
+          <image src="/image/idea.png"></image>
+        </view>
+        <view class="item-txt">
+          <view>发票信息</view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>发票抬头:</view>
+          <view class="item-val">
+            {{item.INV_TITLE}}
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>组织机构代码:</view>
+          <view class="item-val">
+            {{item.OC}}
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>发票地址:</view>
+          <view class="item-val">
+            {{item.IAL}}
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="splited"></view>
+  </view>
+</view>

@@ -1,0 +1,86 @@
+/* pages/work/cust/address.wxss */
+
+.sv-content {
+  position: fixed;
+  top: 0rpx;
+  left: 0rpx;
+  width: 100%;
+  background-color: #f5f5f5;
+}
+
+.cpt-main {
+  margin-bottom: 20rpx;
+  background-color: #fff;
+  border-top: 3rpx solid #ddd;
+  border-bottom: 1rpx solid #ddd;
+}
+
+.cpt-main-item {
+  padding-left: 40rpx;
+}
+
+.cpt-item {
+  border-top: 1rpx solid #ddd;
+  padding: 10rpx 10rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cpt-img {
+  margin: 10rpx 30rpx 15rpx 20rpx;
+}
+
+.cpt-img image {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 100%;
+  box-shadow: 0rpx 0rpx 1rpx 2rpx #ddd;
+  border: none;
+}
+
+.cpt-opt {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 50rpx;
+  font-weight: bolder;
+}
+
+.cpt-opt image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.cpt-content {
+  flex-grow: 2;
+}
+
+.cpt-head {
+  color: #696969;
+  font-size: 30rpx;
+  font-weight: bolder;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.cpt-txt {
+  font-size: 26rpx;
+  color: #808080;
+}
+.cpt-txt image {
+  width: 45rpx;
+  height: 45rpx;
+}
+
+.cust-txt{
+  padding-left: 50rpx;
+  padding-bottom: 5rpx;
+}
+

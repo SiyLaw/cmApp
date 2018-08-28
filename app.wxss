@@ -435,6 +435,10 @@ icon {
   padding: 20rpx 40rpx;
 }
 
+.item-txt input{
+  text-align: right;
+}
+
 .item-right {
   flex: 8;
   display: flex;

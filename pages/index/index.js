@@ -9,7 +9,7 @@ Page({
     hideclass: "",
     realhide: false,
     userInfo: {
-      avatarUrl: '/image/icon.jpg',
+      avatarUrl: '/image/logo.png',
       nickName: ''
     },
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -94,10 +94,11 @@ Page({
       var status = data.status || "0"
       if (status == "1") {
         var user = data.pjson.user || []
+        var work = data.pjson.work || []
         that.setData({
           isUsed: false,
           user: user,
-          work: data.work || []
+          work: work
         })
         app.globalData.AppUser = user[0]
         if (user[0].IS_BIND == "1") {
@@ -110,19 +111,30 @@ Page({
       }
     })
   },
-  navtoWork:function(e){
+  navtoOrder: function(e) {
+    let id = e.target.dataset.id
+    wx.navigateTo({
+      url: "/pages/work/cust/order?id=" + id
+    })
+  },
+  navtoOrderMore: function(e) {
+    wx.navigateTo({
+      url: "/pages/work/cust/orderlist"
+    })
+  },
+  navtoWork: function(e) {
     let id = e.target.dataset.id
     let sc = e.target.dataset.sc
     let sn = e.target.dataset.sn
     let surl = "/pages/work/wItems/scanSettings?id=" + id + "&tp=" + sc + "&nme=" + sn
-    switch(sc){
-      case "DB"://打包岗
+    switch (sc) {
+      case "DB": //打包岗
         surl = "/pages/work/wItems/package?id=" + id + "&tp=" + sc + "&nme=" + sn
         break;
-      case "FH"://发货岗
+      case "FH": //发货岗
         surl = "/pages/work/wItems/package?id=" + id + "&tp=" + sc + "&nme=" + sn
         break;
-      case "PS"://配送岗
+      case "PS": //配送岗
         surl = "/pages/work/wItems/package?id=" + id + "&tp=" + sc + "&nme=" + sn
         break;
     }
@@ -130,9 +142,21 @@ Page({
       url: surl
     })
   },
-  navtoMore:function(e){
+  navtoMore: function(e) {
     wx.navigateTo({
       url: "/pages/work/more"
+    })
+  },
+  onPullDownRefresh: function() {
+    util.Post(this, "LOAD", null, function (that, data, mod) {
+      that.setData({
+        user: data.user,
+        work: data.work || []
+      })
+      if (data.user[0].IS_BIND == "1") {
+        wx.showTabBar({})
+      }
+      wx.stopPullDownRefresh()
     })
   }
 })

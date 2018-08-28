@@ -1,0 +1,213 @@
+<!--pages/work/cust/order.wxml-->
+<!--pages/work/wItems/scanSettings.wxml-->
+<import src="/comm/loading.wxml" />
+<view class='container' style='padding-bottom:110rpx;'>
+  <template is="pageloading" data="{{hideclass:hideclass,realhide:realhide}}" />
+  <view class="page-section">
+    <block wx:for="{{order}}" wx:for-index="idx" wx:key="{{PROD_BASIC_ID}}">
+      <view class="splited"></view>
+      <view wx:if="{{idx==0}}" class="item">
+        <view class="item-image" style="background-color:#4682B4;">
+          <image src="/image/order.png"></image>
+        </view>
+        <view class="item-txt">
+          <view>订单信息</view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>订单号:</view>
+          <view class="item-val-fbd color-red">
+            {{item.P_NO}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>客户名称:</view>
+          <view class="item-val">
+            {{item.PARTNER_NME}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>订单信息:</view>
+          <view class="item-val">
+            {{item.P_NME}}.{{item.P_TYPE}}.{{item.PP_DESC}}.{{item.P_CNT}}.{{item.P_SC}}
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>工艺要求:</view>
+          <view class="item-val">
+            {{item.P_CL}}
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>客户要求:</view>
+          <view class="item-val">
+            {{item.P_CR}}
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>交货时间:</view>
+          <view class="item-val">
+            {{item.P_DT}}
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>业务员:</view>
+          <view class="item-val">
+            {{item.SALESMAN_NME}}
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>总金额:</view>
+          <view class="item-val">
+            {{item.P_AMT}}元
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>预付款:</view>
+          <view class="item-val">
+            {{item.PP_AMT}}元
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>尾款:</view>
+          <view class="item-val">
+            {{item.PL_AMT}}元
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="item-txt">
+          <view class='color-grey'>订单状态:</view>
+          <view class="item-val">
+            {{item.SC}}
+          </view>
+        </view>
+      </view>
+    </block>
+    <block wx:for="{{addr}}" wx:for-index="idx" wx:key="{{ADDRESS_ID}}">
+      <view class="splited"></view>
+      <view wx:if="{{idx==0}}" class="item">
+        <view class="item-image" style="background-color:#2E8B57;">
+          <image src="/image/address.png"></image>
+        </view>
+        <view class="item-txt">
+          <view>收货地址</view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>收货人:</view>
+          <view class="item-val">
+            {{item.CONSIGNEE}}.{{item.TEL}}.{{item.DELIVERY_CNT}}件.{{item.CITY}}.{{item.PROVINCE}}.{{item.COUNTRY_CDE}}.{{item.ADDR_LABEL}}
+          </view>
+        </view>
+      </view>
+    </block>
+    <block wx:for="{{pay}}" wx:for-index="idx" wx:key="{{PID}}">
+      <view class="splited"></view>
+      <view wx:if="{{idx==0}}" class="item">
+        <view class="item-image" style="background-color:#FF6347;">
+          <image src="/image/pay.png"></image>
+        </view>
+        <view class="item-txt">
+          <view>支付信息</view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>{{idx+1}}、</view>
+          <view class="item-val">
+            {{item.CTP}}.{{item.CBTP}}{{item.CF}}.{{item.P_DT}}
+          </view>
+        </view>
+      </view>
+    </block>
+    <block wx:if="{{order.length > 0 && order[0].PROD_GUIDE_IMG_URL != undefined }}">
+      <view class="splited"></view>
+      <view class="item">
+        <view class="item-image" style="background-color:#7B68EE;">
+          <image src="/image/idea.png"></image>
+        </view>
+        <view class="item-txt">
+          <view>产品核对结果</view>
+        </view>
+      </view>
+      <view class="flex-wrp flex-center">
+        <image src="{{img_src}}" bindtap='previewImg' mode='aspectFit'></image>
+      </view>
+    </block>
+    <view class="splited"></view>
+  </view>
+</view>
+<view class="page-bottom">
+  <view class="top-tab flex-wrp flex-center work-cust">
+    <view class="flex-item flex-center" bindtap="close">
+      <image src="/image/close.png"></image>关 闭
+    </view>
+    <!-- <view wx:if="{{SID!=''}}" class="flex-item flex-center yellow" bindtap='showModel'>
+      <image src="/image/upload.png"></image>作 业
+    </view> -->
+  </view>
+</view>
+
+<!--弹出窗-->
+<view class="module-bg-layer" wx:if="{{show_module}}">
+  <view class="dv-module">
+    <form bindsubmit="Submit">
+      <view class="page-section">
+        <view class="item flex-center color-grey title-cust">
+          <view class="item-image">
+            <image src="/image/Settings.png"></image>
+          </view>岗位数据提交
+        </view>
+        <view class="item">
+          <view class="item-txt">
+            <view class="color-grey">实际收货量</view>
+          </view>
+          <view class="item-right">
+            <input type="number" name="ACT_IN_QTY" style='text-align:right;font-size:35rpx;' bindblur='onInputSuccess' placeholder="请输入数量" />
+          </view>
+        </view>
+        <view class="item">
+          <view class="item-txt">
+            <view class="color-grey">实际出货量</view>
+          </view>
+          <view class="item-right">
+            <input type="number" name="ACT_OUT_QTY" style='text-align:right;font-size:35rpx;' bindblur='onInputSuccess' placeholder="请输入数量" />
+          </view>
+        </view>
+        <view class="item">
+          <view class="item-txt">
+            <view class="color-grey">实际放数</view>
+          </view>
+          <view class="item-right">
+            <input type="number" name="ACT_WASTE_QTY" style='text-align:right;font-size:35rpx;' bindblur='onInputSuccess' placeholder="请输入数量" />
+          </view>
+        </view>
+      </view>
+      <view class="cust-btn">
+        <button type="primary" disabled='{{isUsed}}' formType="submit">提 交</button>
+        <button bindtap="CloseModel">关 闭</button>
+      </view>
+    </form>
+  </view>
+</view>

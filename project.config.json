@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 5,
 			"list": [
 				{
 					"id": 0,
@@ -39,16 +39,28 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 2,
+					"name": "scanSettings",
+					"pathName": "pages/work/wItems/scanSettings",
+					"query": "tp=YS&nme=印刷岗"
+				},
+				{
+					"id": 2,
 					"name": "fun_list",
 					"pathName": "pages/work/items",
 					"query": ""
 				},
 				{
-					"id": 2,
-					"name": "scanSettings",
-					"pathName": "pages/work/wItems/scanSettings",
-					"query": "tp=YS&nme=印刷岗"
+					"id": 3,
+					"name": "worderlist",
+					"pathName": "pages/work/wItems/worderlist",
+					"query": "val=lb"
+				},
+				{
+					"id": 4,
+					"name": "package",
+					"pathName": "pages/work/wItems/package",
+					"query": "id=RID0I8N0M7JJ1794&tp=DB&nme=打包"
 				},
 				{
 					"id": -1,

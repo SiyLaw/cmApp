@@ -4,6 +4,55 @@
   border-top: 0px solid #eee;
 }
 
+
+.ad-item {
+  height: 200rpx;
+  margin: 10rpx 10rpx;
+  background-color: #6495ED;
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.ad-item .txt {
+  flex: 6;
+  display: flex;
+  flex-direction: column;
+  letter-spacing: 5rpx;
+}
+
+.ad-item .head {
+  padding-left: 50rpx;
+  padding-top: 50rpx;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: #999 1px 1px 2px;
+}
+
+.ad-item .sub-head {
+  padding-left: 50rpx;
+  padding-top: 10rpx;
+  font-size: 28rpx;
+  color: #eee;
+}
+
+.ad-item .img {
+  height: 170rpx;
+  width: 170rpx;
+  border-radius: 170rpx;
+  background-color: #fffff0;
+  margin: 15rpx 16rpx;
+}
+
+.ad-item image {
+  padding: 12rpx 16rpx;
+  height: 140rpx;
+  width: 140rpx;
+  image-rendering: auto;
+}
+
+
 .cust-zindex {
   z-index: 100 !important;
 }

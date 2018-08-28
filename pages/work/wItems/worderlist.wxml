@@ -1,0 +1,75 @@
+<!--pages/work/cust/orderlist.wxml-->
+<import src="/comm/loading.wxml" />
+<template is="pageloading" data="{{hideclass:hideclass,realhide:realhide}}" />
+<view class="content-fixed-top">
+  <view class="tabs">
+    <view class="{{tab_status=='0'?'selecteditem':'item'}}" data-type="0" bindtap='changeTab'>未{{tab_txt}}</view>
+    <view class="{{tab_status=='1'?'selecteditem':'item'}}" data-type="1" bindtap='changeTab'>已{{tab_txt}}</view>
+    <view class="{{tab_status=='2'?'selecteditem':'item'}}" data-type="2" bindtap='changeTab'>全部</view>
+    <view bindtap='bindRefresh'>
+      <image src="/image/Refresh.png"></image>
+    </view>
+  </view>
+</view>
+<scroll-view class="sv-content" style="height:{{height-rpxrate*102}}px;" scroll-x="{{false}}" scroll-y="{{true}}">
+  <view class="page-section">
+    <view class="item">
+      <view class="item-image" style="background-color:#4682B4;">
+        <image src="/image/order.png"></image>
+      </view>
+      <view class="item-txt">
+        <view>业务单号</view>
+        <view>
+          <input placeholder="输入工单号/订单号查询" value='{{order_no}}' bindblur='bindOrderInputBlur'></input>
+        </view>
+      </view>
+    </view>
+    <view class="item">
+      <view class="item-image" style="background-color:#BDB76B;">
+        <image src="/image/date.png"></image>
+      </view>
+      <picker mode="date" value="{{fdate}}" bindchange="bindDateChange" style='width:100%;'>
+        <view class="item-txt">
+          <view>发货日期</view>
+          <view>
+            {{fdate}}
+          </view>
+        </view>
+      </picker>
+    </view>
+    <view class="item">
+      <view class="item-image" style="background-color:#2E8B57;">
+        <image src="/image/Print_26px.png"></image>
+      </view>
+      <picker value="{{printIdx}}" range="{{printList}}" range-key="PNME" bindchange="bindPrintChange" style='width:100%;'>
+        <view class="item-txt">
+          <view>印刷机型</view>
+          <view>
+            {{printList[printIdx].PNME}}
+          </view>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="splited"></view>
+  <block wx:for="{{orders}}" wx:for-item="oit" wx:for-index="iodx" wx:key="oit.PROD_BASIC_ID">
+    <view wx:if="{{(oit[tab_val_cde] == tab_status) || tab_status =='2'}}" class="cpt-main" style="border-top:1px solid {{COLOR[iodx%COLOR.length]}};" data-id='{{oit.PROD_WORK_SHEET_ID}}' bindtap='bindOrderShowDetail'>
+      <view class="cpt-item">
+        <view class="cpt-content">
+          <view class="cpt-head">
+            <view>{{oit.ORDER_NO}} [{{oit.PROD_TYPE}}]</view>
+          </view>
+          <view>
+            <view class="cpt-txt cust-txt">工单号:{{oit.WORK_SHEET_NO}}</view>
+            <view class="cpt-txt cust-txt">印刷机型:{{oit.PRINTER_NME}}</view>
+            <view class="cpt-txt cust-txt">预计发货:{{oit.RECEIVE_DT}}  件数:{{oit.PROD_CNT}}</view>
+          </view>
+        </view>
+        <view wx:if="{{oit.IS_URGENT=='1'}}" class="txt-ugent">
+          <image src='/image/urgent.png'></image>
+        </view>
+      </view>
+    </view>
+  </block>
+</scroll-view>

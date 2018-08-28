@@ -18,6 +18,7 @@ Page({
     spiltCnt: 1,
     spiltNum: 1,
     PPTS: "",
+    SID: "",
     DB_TP: [],
     index: 0
   },
@@ -25,11 +26,25 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this
     var DB_TP = wx.getStorageSync('_DB_TP') || [];
+    var SID = options.id || ""
+
+    if (SID != "") {
+      var jsPost = new util.jsonRow()
+      jsPost.AddCell("SID", SID)
+      util.Post(that, "DB_SCAN", jsPost, function(that, data, mod) {
+        that.setData({
+          scanTxt: SID,
+          Itemidx: 0,
+          work: data.work || [],
+          items: data.items || []
+        })
+      });
+    }
     if (DB_TP.length <= 0) {
-      util.Post(that, "DB_TP", null, function (that, data, mod) {
+      util.Post(that, "DB_TP", null, function(that, data, mod) {
         let DB_TP = []
         for (var i = 0; i < data.dict.length; i++) {
           DB_TP.push(data.dict[i].VL)
@@ -38,7 +53,7 @@ Page({
           DB_TP: DB_TP,
           hideclass: "hideLoad"
         })
-        setTimeout(function () {
+        setTimeout(function() {
           that.setData({
             realhide: true
           });
@@ -65,7 +80,7 @@ Page({
         DB_TP: DB_TP,
         hideclass: "hideLoad"
       })
-      setTimeout(function () {
+      setTimeout(function() {
         that.setData({
           realhide: true
         });
@@ -93,18 +108,18 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
-  scan: function (e) {
+  scan: function(e) {
     var that = this
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {
         var jsPost = new util.jsonRow()
         jsPost.AddCell("SID", res.result)
-        util.Post(that, "DB_SCAN", jsPost, function (that, data, mod) {
+        util.Post(that, "DB_SCAN", jsPost, function(that, data, mod) {
           that.setData({
             scanTxt: res.result,
             Itemidx: 0,
@@ -115,17 +130,18 @@ Page({
       }
     })
   },
-  showPackageModel: function (e) {
+  showPackageModel: function(e) {
     var that = this
     var Itemidx = e.currentTarget.dataset.idx;
     var ttl = this.data.items[Itemidx].DELIVERY_CNT
     this.setData({
       Itemidx: Itemidx,
+      spiltCnt: 1,
       spiltNum: ttl,
       show_print_module: true
     })
   },
-  onInputSuccess: function (e) {
+  onInputSuccess: function(e) {
     var Itemidx = this.data.Itemidx
     var ttl = this.data.items[Itemidx].DELIVERY_CNT
     var value = parseInt(e.detail.value);
@@ -136,7 +152,7 @@ Page({
       spiltNum: spiltNum
     })
   },
-  SubmitPrint: function (e) {
+  SubmitPrint: function(e) {
     wx.showLoading({
       title: '请求数据中...',
     })
@@ -149,7 +165,7 @@ Page({
     jsPost.AddCell("NUM", this.data.spiltNum)
     jsPost.AddCell("SID", this.data.scanTxt)
     jsPost.AddCell("TP", this.data.DB_TP[this.data.index] || "1号打包机")
-    util.Post(that, "DB_PRINT", jsPost, function (that, data, mod) {
+    util.Post(that, "DB_PRINT", jsPost, function(that, data, mod) {
       that.setData({
         work: data.work || [],
         items: data.items || [],
@@ -158,15 +174,36 @@ Page({
       wx.hideLoading();
     });
   },
-  ClosePrint: function (e) {
+  ClosePrint: function(e) {
     //关闭评论
     this.setData({
       show_print_module: false
     })
   },
-  bindClassChange: function (e) {
+  bindClassChange: function(e) {
     this.setData({
       index: e.detail.value
+    })
+  },
+  showFunAction: function(e) {
+    var that = this
+    var Itemidx = e.currentTarget.dataset.idx
+    wx.showActionSheet({
+      itemList: ["重新打印"],
+      success: function(res) {
+        if (res.tapIndex == 0) {
+          wx.showLoading({
+            title: '请求数据中...',
+          })
+          var jsPost = new util.jsonRow()
+          jsPost.AddCell("AID", that.data.items[Itemidx].ADDRESS_ID)
+          jsPost.AddCell("PID", that.data.items[Itemidx].PROD_BASIC_ID)
+          jsPost.AddCell("SID", that.data.scanTxt)
+          util.Post(that, "DB_RE_PRINT", jsPost, function (that, data, mod) {
+            wx.hideLoading();
+          });
+        }
+      }
     })
   }
 })

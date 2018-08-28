@@ -12,10 +12,61 @@
     </view>
   </block>
   <block wx:else>
-    <template is="UserInfo" data="{{avatarUrl: userInfo.avatarUrl,nickName:userInfo.nickName}}" />
+    <view class="page-section page-section-gap">
+      <view class="ad-item">
+        <view class="txt">
+          <view class="head">重庆聖立印务
+          </view>
+          <view class="sub-head">『在线服务平台』
+          </view>
+        </view>
+        <view class="img">
+          <image src="/image/logo.png"></image>
+        </view>
+      </view>
+    </view>
     <block wx:if="{{user[0].IS_BIND == '1'}}">
       <view wx:if="{{user[0].UTP == 'CUST'}}">
-        下单客户
+        <view class="page-section">
+          <view class="item-total">
+            <view class="titem">
+              <view class="item-desc">用户所属公司</view>
+              <view class="item-head">{{user[0].UCP_NME}}</view>
+            </view>
+            <view class="titem">
+              <view class="item-desc">用户类型</view>
+              <view class="item-head">{{user[0].UTP_DESC}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="page-section">
+          <view class="splited"></view>
+          <view class="item">
+            <view class="item-image" style="background-color:#3CB371;">
+              <image src="../../image/Link.png"></image>
+            </view>
+            <view class="item-txt">
+              <view>最近订单</view>
+              <view bindtap='navtoOrderMore'>更多></view>
+            </view>
+          </view>
+          <view class="table">
+            <view class="table-body">
+              <view class="tr bg-w">
+                <view class="th">订单号</view>
+                <view class="th">类型</view>
+                <view class="th">状态</view>
+              </view>
+              <block wx:for="{{work}}" wx:key="{{ID}}">
+                <view class="tr {{(index+1) % 2 == 0 ? 'bg-g' : ''}} ">
+                  <view class="td lightGreen" data-id='{{item.ID}}' data-sc="{{item.SC}}" data-sn="{{item.SN}}" bindtap='navtoOrder'>{{item.WSN}}</view>
+                  <view class="td">{{item.SN}}</view>
+                  <view class="td">{{item.SC}}</view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
       </view>
       <view wx:elif="{{user[0].UTP == 'OUTSIDE_OPERATOR' }}">
         业务伙伴

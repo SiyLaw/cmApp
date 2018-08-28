@@ -294,7 +294,7 @@
       <image src="/image/Scanner.png"></image>扫 码
     </view>
     <view wx:if="{{SID!=''}}" class="flex-item flex-center yellow" bindtap='showModel'>
-      <image src="/image/upload.png"></image>作 业
+      <image src="/image/upload.png"></image>{{TYPE_CDE=='lz'?'确认领纸':(TYPE_CDE=='lb'?'确认领版':('作 业'))}}
     </view>
   </view>
 </view>

@@ -72,7 +72,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    wx.stopPullDownRefresh();
+    var jsPost = new util.jsonRow()
+    jsPost.AddCell("SNO", 0)
+    jsPost.AddCell("ENO", this.data.logs.length)
+    util.Post(this, "MORE", jsPost, function (that, data, mod) {
+      that.setData({
+        logs: data.logs,
+        iStart: this.data.logs.length
+      })
+      wx.stopPullDownRefresh();
+    })
   },
 
   /**

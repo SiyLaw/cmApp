@@ -1,0 +1,35 @@
+<!--pages/news/news.wxml-->
+<import src="/comm/loading.wxml" />
+<view class='container' style='padding-bottom:110rpx;'>
+  <template is="pageloading" data="{{hideclass:hideclass,realhide:realhide}}" />
+  <view class="page-section">
+    <block wx:for="{{msg}}" wx:for-index="idx" wx:key="{{item.ID}}">
+      <view class="splited"></view>
+      <view wx:if="{{idx==0}}" class="item">
+        <view class="item-image" style="background-color:#4682B4;">
+          <image src="/image/order.png"></image>
+        </view>
+        <view class="item-txt">
+          <view>系统消息</view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>时间:</view>
+          <view class="item-val">
+            {{item.MESSAGE_SEND_DT}}
+          </view>
+        </view>
+      </view>
+      <view class="item-sub">
+        <view class="item-txt">
+          <view class='color-grey'>内容:</view>
+          <view class="item-val">
+            {{item.MESSAGE_INFO}}
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="splited"></view>
+  </view>
+</view>

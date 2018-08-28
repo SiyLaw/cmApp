@@ -1,0 +1,38 @@
+<!--pages/news/newslist.wxml-->
+<import src="/comm/loading.wxml" />
+<template is="pageloading" data="{{hideclass:hideclass,realhide:realhide}}" />
+<view class="container">
+  <swiper autoplay="true" indicator-active-color="white" indicator-color="#C0C0C0" indicator-dots="{{false}}" circular="true" interval="5000" duration="500" class="swiper">
+    <!-- <block wx:for="{{msg}}" wx:for-index="idx" wx:key="item.id">
+      <navigator wx:if="{{idx<4}}" url="focusItem?id={{item.ID}}&txt={{item.INFO_TITLE}}&url={{item.INFO_IMG_URL}}"> -->
+    <swiper-item>
+      <view class="swiper-shadow">
+      </view>
+      <label class="swiper-text">NEWS</label>
+      <image src="/image/news/msg.png" class="swiper-item" mode="center" />
+    </swiper-item>
+    <!-- </navigator>
+    </block> -->
+  </swiper>
+  <block wx:for="{{msg}}" wx:key="{{item.id}}">
+    <navigator class="infoItem" url="news?id={{item.ID}}">
+      <view class="itemTitle" style="font-weight:{{item.MESSAGE_STATUS == '0' ? 'bolder':'none' }};">
+        <label>{{item.SHORTINFO}}</label>
+        <label class="itemTime">{{item.MESSAGE_SEND_USER + "·" + item.MESSAGE_SEND_DT}}</label>
+      </view>
+      <view class="itemImage">
+        <image src="/image/news/msg-min.png"></image>
+      </view>
+    </navigator>
+  </block>
+  <view wx:if="{{msg.length <= 0}}" class="infoItem">
+    <view class="itemTitle">
+      <label>暂无消息...</label>
+      <label class="itemTime">下拉可刷新</label>
+    </view>
+  </view>
+  <view class="loading" hidden="{{!moreLoading}}">
+    <image src="../../image/loading.png"></image>正在载入更多...</view>
+  <view class="loading complete" hidden="{{!moreLoadingComplete}}">- 到底了 -</view>
+  <!-- <view class="buttonslay"></view> -->
+</view>
